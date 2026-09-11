@@ -1,0 +1,536 @@
+/* DOORS 风格主题 —— 经典 Windows/DOORS 灰调风格 */
+
+:root {
+  --doors-bg: #f0f0f0;
+  --doors-panel: #ece9d8;
+  --doors-panel-dark: #d4d0c8;
+  --doors-border-light: #ffffff;
+  --doors-border-dark: #808080;
+  --doors-border-mid: #a0a0a0;
+  --doors-text: #000000;
+  --doors-text-muted: #666666;
+  --doors-sel-bg: #0a246a;
+  --doors-sel-fg: #ffffff;
+  --doors-row-hover: #e8eef8;
+  --doors-row-alt: #f7f7f7;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Tahoma, "Segoe UI", Verdana, Arial, sans-serif;
+  font-size: 12px;
+  color: var(--doors-text);
+  background: var(--doors-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 应用根容器 */
+.doors-app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--doors-bg);
+  color: var(--doors-text);
+  font-family: inherit;
+  font-size: 12px;
+}
+
+/* 工具栏 */
+.doors-toolbar {
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  background: linear-gradient(to bottom, #f5f4ea, #e0dcd0);
+  border-bottom: 1px solid var(--doors-border-dark);
+  box-shadow: inset 0 1px 0 var(--doors-border-light);
+}
+
+/* 按钮 */
+.doors-btn {
+  padding: 3px 10px;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--doors-text);
+  background: linear-gradient(to bottom, #f8f7f0, #d8d4c8);
+  border: 1px solid var(--doors-border-dark);
+  border-top-color: var(--doors-border-light);
+  border-left-color: var(--doors-border-light);
+  border-radius: 2px;
+  cursor: pointer;
+  min-height: 22px;
+  box-shadow: inset -1px -1px 0 var(--doors-panel-dark);
+  line-height: 1.2;
+}
+
+.doors-btn:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #fffef8, #e4e0d4);
+}
+
+.doors-btn:active:not(:disabled) {
+  border-top-color: var(--doors-border-dark);
+  border-left-color: var(--doors-border-dark);
+  border-bottom-color: var(--doors-border-light);
+  border-right-color: var(--doors-border-light);
+  background: #d8d4c8;
+  box-shadow: none;
+}
+
+.doors-btn:disabled {
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* 输入框 */
+.doors-input {
+  padding: 3px 6px;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--doors-text);
+  background: #ffffff;
+  border: 1px solid var(--doors-border-dark);
+  border-top-color: #808080;
+  border-left-color: #808080;
+  border-radius: 0;
+  min-height: 22px;
+  box-sizing: border-box;
+}
+
+.doors-input:focus {
+  outline: 1px dotted #000;
+  outline-offset: -3px;
+}
+
+/* 表格容器 */
+.doors-table {
+  flex: 1;
+  border: 1px solid var(--doors-border-dark);
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  margin: 4px 8px 0 8px;
+  /*position: relative;*/
+  /* 避免面板溢出到应用外部 */
+  min-height: 0;
+}
+
+/* 表头 */
+.doors-table-header {
+  display: flex;
+  background: linear-gradient(to bottom, #f8f7f0, #d8d4c8);
+  border-bottom: 1px solid var(--doors-border-dark);
+  box-shadow: inset 0 1px 0 var(--doors-border-light);
+  flex-shrink: 0;
+}
+
+.doors-th {
+  padding: 4px 6px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #333;
+  border-right: 1px solid #b8b4a8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.doors-th:last-child {
+  border-right: none;
+}
+
+/* 行 */
+.doors-row {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid #e8e8e8;
+  min-height: 22px;
+  font-size: 12px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.doors-row:hover {
+  background: var(--doors-row-hover);
+}
+
+.doors-row.selected {
+  background: var(--doors-sel-bg);
+  color: var(--doors-sel-fg);
+}
+
+.doors-row.selected .doors-td,
+.doors-row.selected .doors-tree-toggle {
+  color: var(--doors-sel-fg);
+}
+
+.doors-row.matched {
+  background: #fffbe6;
+}
+
+.doors-row.matched.selected {
+  background: var(--doors-sel-bg);
+}
+
+/* 单元格 */
+.doors-td {
+  padding: 2px 6px;
+  border-right: 1px solid #e8e8e8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: #222;
+  box-sizing: border-box;
+}
+
+.doors-td:last-child {
+  border-right: none;
+}
+
+/* 树形展开按钮 */
+.doors-tree-toggle {
+  width: 16px;
+  display: inline-block;
+  text-align: center;
+  font-family: monospace;
+  font-size: 11px;
+  cursor: pointer;
+  color: #555;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* 状态栏（内凹效果） */
+.doors-statusbar {
+  padding: 3px 8px;
+  background: var(--doors-bg);
+  border-top: 1px solid var(--doors-border-light);
+  box-shadow: inset 0 1px 0 var(--doors-border-mid);
+  font-size: 11px;
+  color: #333;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+
+.doors-statusbar > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 详情面板 */
+.doors-detail {
+  border-top: 1px solid var(--doors-border-dark);
+  background: #ffffff;
+  padding: 8px 10px;
+  overflow: auto;
+  box-shadow: inset 0 1px 0 var(--doors-border-light);
+  margin: 4px 8px 0 8px;
+  box-sizing: border-box;
+}
+
+.doors-detail h3 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.doors-detail h4 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 列选择面板 */
+.doors-popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: #ffffff;
+  border: 1px solid var(--doors-border-dark);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  min-width: 220px;
+  max-height: 360px;
+  overflow-y: auto;
+  z-index: 1000;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.doors-popover label {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.doors-popover label:hover {
+  background: var(--doors-row-hover);
+}
+
+/* 滚动条 —— 细条立体效果 */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #f0f0f0, #c8c8c8);
+  border: 1px solid #808080;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #e8e8e8, #b8b8b8);
+}
+
+::-webkit-scrollbar-corner {
+  background: #f0f0f0;
+}
+
+/* 高亮 */
+mark {
+  background: #ffeb3b;
+  color: #000;
+  padding: 0;
+}
+
+.doors-row.selected mark {
+  background: #ffd54f;
+  color: #000;
+}
+
+/* 文件输入 */
+.doors-toolbar input[type="file"] {
+  font-size: 12px;
+  font-family: inherit;
+}
+
+/* 对比模式徽章 */
+.doors-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* 分割条：拖动调整详情面板高度 */
+.doors-splitter {
+  height: 5px;
+  cursor: row-resize;
+  background: linear-gradient(to bottom, #f8f7f0, #d8d4c8);
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #808080;
+  flex-shrink: 0;
+  margin: 2px 8px 0 8px;
+  user-select: none;
+}
+
+.doors-splitter:hover {
+  background: linear-gradient(to bottom, #fffef8, #c8c4b8);
+}
+
+.doors-splitter:active {
+  background: linear-gradient(to bottom, #d8d4c8, #b8b4a8);
+}
+
+/* ===== 列过滤器 ===== */
+
+/* 带过滤按钮的表头 */
+.doors-th.doors-th-filter {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: default;
+  overflow: visible;
+}
+
+.doors-th.doors-th-filter.filtered {
+  background: linear-gradient(to bottom, #fff5d5, #f0e2a8);
+}
+
+.doors-th-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.doors-filter-btn {
+  display: inline-block;
+  padding: 0 3px;
+  font-size: 10px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 2px;
+  line-height: 14px;
+  min-width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.doors-filter-btn:hover {
+  background: #d0cbbd;
+  color: #000;
+}
+
+.doors-filter-btn.active {
+  color: #7a4200;
+  background: #ffd88a;
+  font-weight: bold;
+  border: 1px solid #b07000;
+}
+
+.doors-filter-panel {
+  /* position / top / left 现在由 inline style 动态提供 */
+  background: #ffffff;
+  border: 1px solid var(--doors-border-dark);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  min-width: 220px;
+  max-width: 300px;
+  z-index: 2000;
+  font-size: 12px;
+  font-weight: normal;
+  color: #000;
+  box-sizing: border-box;
+  text-align: left;
+  cursor: default;
+}
+
+.doors-filter-panel-title {
+  font-weight: bold;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #d0d0d0;
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doors-filter-actions {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.doors-filter-actions .doors-btn {
+  flex: 1;
+  padding: 1px 4px;
+  font-size: 11px;
+  min-height: 20px;
+}
+
+.doors-filter-values {
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 3px 0;
+  background: #ffffff;
+}
+
+.doors-filter-value {
+  display: flex;
+  align-items: center;
+  padding: 1px 4px;
+  cursor: pointer;
+  user-select: none;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.doors-filter-value:hover {
+  background: var(--doors-row-hover);
+}
+
+.doors-filter-value input[type="checkbox"] {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.doors-filter-value-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.doors-filter-value-count {
+  color: #888;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.doors-filter-footer {
+  margin-top: 6px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.doors-filter-footer .doors-btn {
+  padding: 2px 12px;
+  font-size: 11px;
+  min-height: 20px;
+}
+
+/* 列宽拖拽手柄 */
+.col-resize-handle {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  user-select: none;
+  z-index: 3;
+  background: transparent;
+}
+
+.col-resize-handle:hover,
+.col-resize-handle:active {
+  background: rgba(10, 36, 106, 0.4);
+}
+
+/* 表格内层容器（用于支持横向滚动） */
+.doors-table-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
